@@ -12,7 +12,6 @@ int main() {
     cin >> n >> m;
     vector<vector<int>> vec1(n, vector<int>(m,0));
     vector<vector<int>> vec2(n, vector<int>(m, 0));
-    vector<vector<int>> vec3(n, vector<int>(m, 0));
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
@@ -26,8 +25,8 @@ int main() {
     }
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            vec3[i][j] = vec1[i][j] + vec2[i][j];
-            cout << vec3[i][j] << " ";
+            int sum = vec1[i][j] + vec2[i][j];
+            cout << sum << " ";
         }
         cout << "\n";
     }
