@@ -52,14 +52,20 @@ public class Main {
             } else if (stock[i-1] > stock[i]) {
                 down++;
                 up=0;
-            }
+            } else { up = down = 0; }
+
             if (up >= 3) { // 3일 연속 상승하면 매도
-                timing += timing_count * stock[i];
+                if (timing > 0) {
+                    timing += timing_count * stock[i];
+                    timing_count = 0;
+                }
             }
             else if (down >= 3) { // 3일 연속 하락하면 구매
-                if (timing == 0) continue;
-                timing_count = timing / stock[i];
-                timing -= timing_count * stock[i];
+                int buy = timing / stock[i];
+                if (buy > 0) {
+                    timing_count += buy;
+                    timing -= buy * stock[i];
+                }
             }
         }
     }
@@ -67,9 +73,10 @@ public class Main {
     private static void buy_bnp() {
         for (int i = 0; i < 14; i++) {
             if (bnp == 0) break;
-            if ( bnp / stock[i] != 0) {
-                bnp_count = bnp / stock[i];
-                bnp -= bnp_count * stock[i];
+            int buy = bnp / stock[i];
+            if ( buy > 0) {
+                bnp_count += buy;
+                bnp -= buy * stock[i];
             }
         }
     }
